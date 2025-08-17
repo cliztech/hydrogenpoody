@@ -1,0 +1,9 @@
+@import './tokens.css';
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  background: var(--p-cream);
+  color: var(--p-cocoa);
+}

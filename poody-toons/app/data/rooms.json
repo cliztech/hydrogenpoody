@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "poody-who",
+    "title": "Poody Who",
+    "tagline": "Meet the flock!",
+    "bg": "canopy-day",
+    "cta": {"label": "Explore", "href": "/room/poody-who"},
+    "icon": "/assets/characters/poody.svg"
+  },
+  {
+    "slug": "poody-toons",
+    "title": "Poody Toons",
+    "tagline": "Watch the latest episodes",
+    "bg": "screen-wall",
+    "cta": {"label": "Watch Now", "href": "/videos"},
+    "icon": "/assets/characters/owl.svg"
+  },
+  {
+    "slug": "poody-tech",
+    "title": "Poody Tech",
+    "tagline": "Beep boop!",
+    "bg": "server-room",
+    "cta": {"label": "Peek Inside", "href": "/room/poody-tech"},
+    "icon": "/assets/characters/raccoon.svg"
+  },
+  {
+    "slug": "shop",
+    "title": "Shop",
+    "tagline": "Toys and tees",
+    "bg": "shelf",
+    "cta": {"label": "Browse", "href": "/shop"},
+    "icon": "/assets/ui/cart.svg"
+  }
+]
