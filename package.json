@@ -1,131 +1,48 @@
 {
-  "name": "hydrogen",
-  "packageManager": "npm@10.9.2",
+  "name": "poody-toons",
   "private": true,
-  "sideEffects": false,
-  "scripts": {
-    "build": "npm run build:pkg",
-    "build:pkg": "turbo build --parallel --filter=./packages/*",
-    "build:examples": "turbo build --parallel --filter=./examples/*",
-    "build:templates": "turbo build --parallel --filter=./templates/*",
-    "build:all": "npm run build:pkg && npm run build:templates && npm run build:examples",
-    "ci:checks": "turbo run lint test format:check typecheck",
-    "decrypt": "ejson decrypt secrets.ejson",
-    "dev": "npm run dev:pkg",
-    "dev:pkg": "turbo dev --parallel --filter=./packages/*",
-    "dev:app": "cd templates/skeleton && npm run dev --",
-    "docs:build": "turbo run build-docs",
-    "docs:preview": "turbo run preview-docs",
-    "encrypt": "ejson encrypt secrets.ejson",
-    "lint": "eslint --no-error-on-unmatched-pattern ./packages",
-    "lint-staged": "eslint --no-error-on-unmatched-pattern",
-    "format": "prettier --write --ignore-unknown ./packages",
-    "format:check": "prettier --check --ignore-unknown ./packages",
-    "typecheck": "turbo typecheck --parallel",
-    "typecheck:examples": "turbo typecheck --parallel --filter=./examples/*",
-    "test": "turbo run test --parallel",
-    "test:watch": "turbo run test:watch",
-    "version": "changeset version && npm run version:post && npm run format",
-    "version:post": "npm run version:hydrogen && npm run version:cli",
-    "version:hydrogen": "node -p \"'export const LIB_VERSION = \\'' + require('./packages/hydrogen/package.json').version + '\\';'\" > packages/hydrogen/src/version.ts",
-    "version:cli": "cd packages/cli && npm run generate:manifest",
-    "version:next": "node scripts/changeset-version-next.mjs",
-    "changeset": "changeset",
-    "clean-all": "rimraf node_modules/.bin && rimraf node_modules/.cache && rimraf packages/*/dist && rimraf templates/*/.cache",
-    "check": "npm run build && npm run lint && npm run typecheck && npm run test",
-    "pre-commit:encrypt": "bash -c 'git diff --cached --name-only | grep -q \"^secrets.ejson$\" && ejson encrypt secrets.ejson && git add secrets.ejson || true'"
-  },
+  "packageManager": "npm@10.9.2",
+  "type": "module",
   "workspaces": [
-    "docs/preview",
-    "examples/b2b",
-    "examples/custom-cart-method",
-    "examples/express",
-    "examples/gtm",
-    "examples/infinite-scroll",
-    "examples/legacy-customer-account-flow",
-    "examples/metaobjects",
-    "examples/multipass",
-    "examples/partytown",
-    "examples/sitemap",
-    "examples/subscriptions",
-    "examples/third-party-queries-caching",
-    "packages/cli",
-    "packages/create-hydrogen",
-    "packages/hydrogen-codegen",
-    "packages/hydrogen-react",
-    "packages/hydrogen",
-    "packages/mini-oxygen",
-    "packages/remix-oxygen",
-    "templates/skeleton"
+    "apps/web",
+    "packages/ui",
+    "packages/games",
+    "packages/config",
+    "packages/assets",
+    "tools/*"
   ],
-  "prettier": "@shopify/prettier-config",
-  "dependencies": {
-    "@shopify/cli-hydrogen": "*",
-    "react-router": "^7.5.1",
-    "react-router-dom": "^7.5.1"
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build --parallel",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "e2e": "turbo run e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.8",
-    "@changesets/cli": "^2.26.0",
-    "@eslint/compat": "^1.2.5",
-    "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.18.0",
+    "@axe-core/cli": "^4.10.2",
     "@playwright/test": "^1.40.1",
-    "@shopify/cli": "~3.80.4",
-    "@types/eslint": "^9.6.1",
-    "@types/semver": "^7.5.8",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
     "@typescript-eslint/eslint-plugin": "^8.21.0",
     "@typescript-eslint/parser": "^8.21.0",
-    "cross-env": "^7.0.3",
+    "autoprefixer": "^10.4.14",
     "eslint": "^9.18.0",
-    "eslint-import-resolver-node": "^0.3.9",
-    "eslint-import-resolver-typescript": "^3.7.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jest": "^28.11.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-tsdoc": "^0.4.0",
-    "fast-fifo": "1.3.2",
-    "globals": "^15.14.0",
-    "lint-staged": "^10.5.4",
+    "husky": "^9.0.10",
+    "lighthouse": "^12.8.1",
+    "lint-staged": "^15.2.2",
+    "normalize-path": "^3.0.0",
+    "postcss": "^8.4.31",
     "prettier": "^3.4.2",
-    "rimraf": "^6.0.1",
-    "tiny-invariant": "^1.3.3",
-    "tsup": "^8.4.0",
-    "turbo": "2.3.4",
+    "tailwindcss": "^3.4.1",
+    "turbo": "^2.3.4",
     "typescript": "^5.2.2",
-    "yorkie": "^2.0.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged && npm run pre-commit:encrypt"
+    "vitest": "^1.2.2"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "prettier --write"
-    ],
-    "*.{ts,tsx}": [
-      "npm run lint-staged --",
-      "prettier --parser=typescript --write"
-    ],
-    "*.html": [
-      "prettier --write"
-    ],
-    "*.css": [
-      "prettier --write"
-    ]
-  },
-  "overrides": {
-    "@oclif/core": "3.26.5",
-    "@shopify/cli-kit": "3.80.4"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.34.9"
+    "*.{ts,tsx,js,jsx,json,css,md}": "prettier --write"
   }
 }

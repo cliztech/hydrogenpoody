@@ -1,21 +1,12 @@
 {
-  "include": ["**/*.ts"],
-  "exclude": ["dist", "node_modules", ".turbo", ".cache"],
+  "extends": "./packages/config/tsconfig.json",
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "target": "ESNext",
-    "module": "ESNext",
-    "types": ["node"],
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "declaration": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true
-  }
+    "baseUrl": ".",
+    "paths": {
+      "@poody/ui/*": ["packages/ui/src/*"],
+      "@poody/games/*": ["packages/games/src/*"],
+      "@poody/config": ["packages/config"]
+    }
+  },
+  "include": ["apps", "packages", "tools"]
 }

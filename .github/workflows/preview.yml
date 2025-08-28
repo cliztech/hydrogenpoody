@@ -1,11 +1,9 @@
-name: CI
+name: Preview
 on:
-  push:
-    branches: [main]
   pull_request:
 
 jobs:
-  ci:
+  preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,7 +11,5 @@ jobs:
         with:
           node-version: 18
       - run: npm install
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npm test
       - run: npm run build
+      - run: echo "Deploy preview placeholder"

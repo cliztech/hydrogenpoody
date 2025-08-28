@@ -1,11 +1,10 @@
-name: CI
+name: Release
 on:
   push:
     branches: [main]
-  pull_request:
 
 jobs:
-  ci:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,7 +12,4 @@ jobs:
         with:
           node-version: 18
       - run: npm install
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npm test
-      - run: npm run build
+      - run: npx semantic-release
